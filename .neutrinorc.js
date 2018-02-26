@@ -1,11 +1,24 @@
+const VERON = 'veron'
+
 module.exports = {
   use: [
-    '@neutrinojs/standardjs',
+    ['@neutrinojs/react', {}],
     [
-      '@neutrinojs/library',
+      '@neutrinojs/eslint',
       {
-        name: 'veron'
+        eslint: {
+            rules: { 
+                semi: 'off',
+                indent: [1, 4]
+            }
+        }
       }
-    ]
+    ],
+    (neutrino) => {
+      neutrino.config
+        .output
+          .filename(`${VERON}.[name].bundle.js`)
+    },
+    
   ]
 };
