@@ -1,0 +1,15 @@
+{
+  "name": "veron",
+  "version": "1.0.0",
+  "main": "src/veron-app.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "neutrino build",
+    "lint": "neutrino lint"
+  },
+  "devDependencies": {
+    "@neutrinojs/library": "^8.1.1",
+    "@neutrinojs/standardjs": "^8.1.1",
+    "neutrino": "^8.1.1"
+  }
+}
