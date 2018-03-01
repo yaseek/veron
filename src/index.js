@@ -1,19 +1,36 @@
-import ReactDOM from 'react-dom'
-
 import { additionalFields } from './components'
+
+const action = (type, form) => (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    console.log('ACTION', type, form && new FormData(form))
+}
 
 const nodeInserted = (node) => {
 
     const { path, relatedNode } = node
 
-    console.log('INSERTED', node)
-
-    const formContainer = relatedNode.querySelector('.SignupForm_signupForm_3mgQg')
+    const formContainer = relatedNode.querySelector('.SignupForm_signupForm_3mgQg form')
 
     if (formContainer) {
-        const div = window.document.createElement('div')
-        formContainer.insertBefore(div, null)
-        ReactDOM.render(additionalFields(), div)
+
+        formContainer.addEventListener('submit', action('SUBMIT'))
+
+        const submitButton = formContainer.querySelector('button')
+        const submitContainer = formContainer.querySelector('.SignupForm_button_218KF')
+
+        if (submitButton) {
+            submitButton.addEventListener('click', action('CLICK', formContainer))
+        }
+
+
+        additionalFields().map((field) => {
+
+            formContainer.insertBefore(field, submitContainer || null)
+            
+        })
+
     }
 }
 

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "neutrino start --use @neutrinojs/react",
     "build": "neutrino build --use @neutrinojs/react",
+    "web": "lite-server",
     "lint": "neutrino lint"
   },
   "devDependencies": {
@@ -17,6 +18,7 @@
     "@neutrinojs/react": "^8.1.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-recaptcha": "^2.3.7"
   }
 }
