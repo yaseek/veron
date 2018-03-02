@@ -1,35 +1,25 @@
-import { additionalFields } from './components'
+import { additionalFields, AdditionalForm } from './components'
 
-const action = (type, form) => (e) => {
-    e.preventDefault()
-    e.stopPropagation()
+const marked = new WeakMap()
 
-    console.log('ACTION', type, form && new FormData(form))
-}
+let count = 0
 
 const nodeInserted = (node) => {
 
     const { path, relatedNode } = node
 
-    const formContainer = relatedNode.querySelector('.SignupForm_signupForm_3mgQg form')
+    const formContainer = relatedNode.querySelector('.SignupForm_signupForm_3mgQg')
 
-    if (formContainer) {
+    if (formContainer && !marked.get(formContainer)) {
+        marked.set(formContainer, true)
 
-        formContainer.addEventListener('submit', action('SUBMIT'))
+        additionalFields(formContainer)
 
-        const submitButton = formContainer.querySelector('button')
-        const submitContainer = formContainer.querySelector('.SignupForm_button_218KF')
+        count ++
 
-        if (submitButton) {
-            submitButton.addEventListener('click', action('CLICK', formContainer))
+        if (count > 10) {
+            window.removeEventListener('DOMNodeInserted', nodeInserted)
         }
-
-
-        additionalFields().map((field) => {
-
-            formContainer.insertBefore(field, submitContainer || null)
-            
-        })
 
     }
 }
