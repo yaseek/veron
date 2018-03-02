@@ -27,7 +27,7 @@ const FORM_NAME = 'additionalForm'
 const validate = ({ email }) => {
     return {
         email: email
-            ? !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && 'INVALID'
+            ? !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && 'Неверно введён e-mail'
             : void 0
     }
 }
