@@ -9,6 +9,13 @@ const REGISTRATION_URL = 'http://veron.myjino.ru/css/1/reg.php'
 
 const noClick = (e) => e.stopPropagation()
 
+const buttonClick = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+
+    window.location.href = REGISTRATION_URL
+}
+
 const nodeInserted = (node) => {
 
     const { path, relatedNode } = node
@@ -42,6 +49,16 @@ const nodeInserted = (node) => {
         if (item.innerText.trim().toUpperCase() === 'РЕГИСТРАЦИЯ') {
             item.addEventListener('click', noClick)
             item.href = REGISTRATION_URL
+        }
+    }
+    
+    const buttonsCollection = relatedNode.getElementsByTagName('BUTTON')
+    
+    for (let i = 0; i < buttonsCollection.length; i++) {
+        const item = buttonsCollection.item(i)
+
+        if (item.innerText.trim().toUpperCase() === 'РЕГИСТРАЦИЯ') {
+            item.addEventListener('click', buttonClick)
         }
     }
     
