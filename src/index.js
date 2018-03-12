@@ -40,6 +40,48 @@ const renderContact = (node, contactName) => {
     }
 }
 
+const languages = [
+    {
+        id: 'ru',
+        title: 'Русский'
+    },
+    {
+        id: 'en',
+        title: 'Английский'
+    }
+]
+
+const DEFAULT_LANGUAGE = 'Русский'
+
+const insertDropdown = (node, className) => {
+
+    const state = { show: false }
+
+    const renderDrop = (node, state) => {
+        const show = state.show ? 'show' : '';
+        node.innerHTML = `<span class="dropdown ${className} ${show}">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="${state.show}">
+            ${DEFAULT_LANGUAGE}
+          </a>
+          <div class="dropdown-menu ${show}" aria-labelledby="dropdownMenuButton">
+            ${languages.map((lang) => `<a class="dropdown-item" href="/${lang.id}">${lang.title}</a>`).join('')}
+          </div>
+        </span>`
+
+        const toggle = node.querySelector('.dropdown-toggle')
+
+        toggle && toggle.addEventListener('click', (e) => {
+            e.stopPropagation()
+            state.show = !state.show
+            renderDrop(node, state)
+        })
+    }
+
+    renderDrop(node, state)
+
+    document.addEventListener('click', () => renderDrop(node, { show: false }))
+}
+
 const nodeInserted = (node) => {
 
     const { path, relatedNode } = node
@@ -99,7 +141,35 @@ const nodeInserted = (node) => {
             renderContact(contact, contact.innerHTML)
         }
     }
+
+    /*------------------- LANGUAGE DROPDOWN -------------------------*/
+
+    [
+        {
+            selector: 'ul.Navigation_list_1YCWP',
+            li: 'Navigation_item_2Qso8',
+            className: 'Navigation_link_jf46m'
+        },
+        {
+            selector: 'ul.MobileNavigation_list_1E9Ed',
+            li: 'MobileNavigation_item_1efMj',
+            className: 'MobileNavigation_link_2tgZ3'
+        }
+    ].map(({ selector, li, className }) => {
+        const cont = relatedNode.querySelector(selector)
+
+        if (cont && !marked.get(cont)) {
+            const span = document.createElement('li')
+            span.className = li
+            span.style.position = 'relative'
+            span.style.zIndex = '10'
+            cont.insertBefore(span, cont.children.item(0))
+
+            insertDropdown(span, className) 
+
+            marked.set(cont, true)
+        }
+    })
 }
 
 window.addEventListener('DOMNodeInserted', nodeInserted)
-
