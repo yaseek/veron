@@ -33,7 +33,11 @@ const renderContact = (node, contactName) => {
 
     if (!marked.get(node) && fbId) {
         node.innerHTML = `<span>${contactName}</span>
-            <a class="icon_facebook" href="https://www.facebook.com/${fbId}">
+            <a
+                class="icon_facebook"
+                href="https://www.facebook.com/${fbId}"
+                target="_blank"
+            >
                 <img src="/img/facebook.svg" />
             </a>`;
         marked.set(node, true)

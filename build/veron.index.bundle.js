@@ -1,5 +1,9 @@
 webpackJsonp(["index"],{"./src/index.js":function(){const a="/vhod.php",b="/reg.php",c=new WeakMap,d=(a)=>a.stopPropagation(),e=(a)=>(b)=>{b.stopPropagation(),b.preventDefault(),window.location.href=a},f={"Алиса Погарская":"1234","Michael A. Soares":"1234","Ailien Phan":"1234","Adriana Ramon":"1234","Kyle Rankin":"1234","Robert Rodden":"1234","Pavlo Grozian":"1234","Josh Wright":"1234","Jamie Radice":"1234"},g=(a,b)=>{const d=f[b];!c.get(a)&&d&&(a.innerHTML=`<span>${b}</span>
-            <a class="icon_facebook" href="https://www.facebook.com/${d}">
+            <a
+                class="icon_facebook"
+                href="https://www.facebook.com/${d}"
+                target="_blank"
+            >
                 <img src="/img/facebook.svg" />
             </a>`,c.set(a,!0))},h=[{id:"ru",title:"\u0420\u0443\u0441\u0441\u043A\u0438\u0439"},{id:"en",title:"\u0410\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u0438\u0439"}],i=(a,b)=>{const c=(a,d)=>{const e=d.show?"show":"";a.innerHTML=`<span class="dropdown ${b} ${e}">
           <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="${d.show}">
