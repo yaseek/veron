@@ -34,7 +34,6 @@ const renderContact = (node, contactName) => {
     const fbId = fbIds[contactName]
 
     if (!marked.get(node) && fbId) {
-        console.log('CCC', node, fbId)
         node.innerHTML = `<span>${contactName}</span>
             <a
                 class="icon_facebook"
