@@ -17,6 +17,8 @@ const buttonClick = (url) => (e) => {
 }
 
 const fbIds = {
+    "Игорь Харитонов": "1234",
+    "Андрей Бабкин": "1234",
     "Алиса Погарская": "1234",
     "Michael A. Soares": "1234",
     "Ailien Phan": "1234",
@@ -32,6 +34,7 @@ const renderContact = (node, contactName) => {
     const fbId = fbIds[contactName]
 
     if (!marked.get(node) && fbId) {
+        console.log('CCC', node, fbId)
         node.innerHTML = `<span>${contactName}</span>
             <a
                 class="icon_facebook"
@@ -137,6 +140,16 @@ const nodeInserted = (node) => {
     }
     
     /*---------------- CONTACTS ---------------------------------*/
+
+    
+
+    const founders = relatedNode.querySelectorAll('.AboutUs_founders__heading_1fjX9')
+
+    if (founders && founders.length) {
+        for (const contact of founders.values()) {
+            renderContact(contact, contact.innerHTML)
+        }
+    }
 
     const contacts = relatedNode.querySelectorAll('.AboutUs_staff__heading_1TiRm')
 
